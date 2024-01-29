@@ -5,19 +5,21 @@ const $showsList = $("#showsList");
 const $episodesArea = $("#episodesArea");
 const $searchForm = $("#searchForm");
 
+import { MISSING_IMAGE_URL } from './model.ts';
+
 
 /** Given list of shows, create markup for each and to DOM */
 
-function populateShows(shows) {
+function populateShows(shows: Array<any>) {
   $showsList.empty();
-  const x = "https://static.tvmaze.com/" +
-    "uploads/images/medium_portrait/160/401704.jpg"
+  // const x = "https://static.tvmaze.com/" +
+  //   "uploads/images/medium_portrait/160/401704.jpg"
   for (let show of shows) {
     const $show = $(
       `<div data-show-id="${show.id}" class="Show col-md-12 col-lg-6 mb-4">
          <div class="media">
            <img
-              src=${x}
+              src=${show.image.medium || MISSING_IMAGE_URL}
               alt="Bletchly Circle San Francisco"
               class="w-25 me-3">
            <div class="media-body">

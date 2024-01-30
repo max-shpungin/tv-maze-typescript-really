@@ -44,7 +44,7 @@ async function searchShowsByTerm(term: string): Promise<object> {
 
 async function getEpisodesOfShow(id:number) {
 
-  const resp = await fetch(`${TVMAZE_API_URL}/shows/${id}/espidoes`);
+  const resp = await fetch(`${TVMAZE_API_URL}shows/${id}/episodes`);
   const episodes:Iepisode[] = await resp.json();
 
   return episodes;

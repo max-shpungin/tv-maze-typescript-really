@@ -4,6 +4,7 @@ import { getEpisodesOfShow, searchShowsByTerm } from "./model.ts";
 const $showsList = $("#showsList");
 const $episodesArea = $("#episodesArea");
 const $searchForm = $("#searchForm");
+import {Ishow, Iepisode, IshowResponse } from './interfaces';
 
 
 import { MISSING_IMAGE_URL } from './model.ts';
@@ -47,9 +48,8 @@ function populateShows(shows: Array<any>) {
 async function searchForShowAndDisplay() {
   const term = $("#searchForm-term").val() as string;
   const shows = await searchShowsByTerm(term);
-
-  $episodesArea.hide();
   populateShows(shows);
+
 }
 
 $searchForm.on("submit", async function (evt) {
@@ -57,17 +57,26 @@ $searchForm.on("submit", async function (evt) {
   await searchForShowAndDisplay();
 });
 
-$('#episodesArea').on('click', ('button'), sayHi);
+$showsList.on('click', ('.Show-getEpisodes'),async (evt) => {
+  console.log('the event',evt);
+  const $evt = $(evt)
+  console.log('the evt$',$evt);
+  const $id = $evt[0].target.closest('[data-show-id]');
+  console.log('the id$',$id);
 
+  const episodes = await getEpisodesOfShow(1767)
+  $episodesArea.show();
 
-function sayHi() {
-  console.log('hello');
-}
+  for (const episode of episodes){
+    const $episode = $(`<div>${episode.id}</div>`);
+
+    $episodesArea.append($episode);
+  }
+});
 
 
 /** Write a clear docstring for this function... */
 
 function populateEpisodes(episodes) {
   console.log(getEpisodesOfShow(1));
-
 }

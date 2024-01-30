@@ -1,7 +1,8 @@
 const MISSING_IMAGE_URL = "https://tinyurl.com/missing-tv";
 const TVMAZE_API_URL = "http://api.tvmaze.com/";
+// const TVMAZE_EPISODE_API =
+import {Ishow, Iepisode, IshowResponse } from './interfaces';
 
-const o: { name: "Joel"; } = { name: "Joel" };
 /** Given a search term, search for tv shows that match that query.
  *
  *  Returns (promise) array of show objects: [show, show, ...].
@@ -42,6 +43,11 @@ async function searchShowsByTerm(term: string): Promise<object> {
  */
 
 async function getEpisodesOfShow(id:number) {
+
+  const resp = await fetch(`${TVMAZE_API_URL}/shows/${id}/espidoes`);
+  const episodes:Iepisode[] = await resp.json();
+
+  return episodes;
 }
 
 

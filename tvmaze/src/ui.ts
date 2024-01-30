@@ -5,6 +5,7 @@ const $showsList = $("#showsList");
 const $episodesArea = $("#episodesArea");
 const $searchForm = $("#searchForm");
 
+
 import { MISSING_IMAGE_URL } from './model.ts';
 
 
@@ -56,8 +57,17 @@ $searchForm.on("submit", async function (evt) {
   await searchForShowAndDisplay();
 });
 
+$('#episodesArea').on('click', ('button'), sayHi);
+
+
+function sayHi() {
+  console.log('hello');
+}
+
 
 /** Write a clear docstring for this function... */
 
 function populateEpisodes(episodes) {
+  console.log(getEpisodesOfShow(1));
+
 }
